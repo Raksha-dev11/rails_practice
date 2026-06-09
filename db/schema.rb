@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_06_09_045105) do
+ActiveRecord::Schema[7.2].define(version: 2026_06_09_063154) do
   create_table "projects", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -25,6 +25,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_09_045105) do
     t.boolean "completed", default: false, null: false
     t.integer "priority", default: 1, null: false
     t.integer "project_id", null: false
+    t.text "description"
     t.index ["project_id"], name: "index_todos_on_project_id"
   end
 
