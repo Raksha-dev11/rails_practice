@@ -13,10 +13,21 @@
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="bg-gray-50 min-h-screen">
+    <nav class="bg-white shadow-sm border-b border-gray-200">
+      <div class="container mx-auto px-6 py-4 flex items-center gap-8">
+        <span class="text-xl font-bold text-blue-600">MyApp</span>
+        <%= link_to "Projects", projects_path, class: "text-gray-600 hover:text-blue-600 font-medium text-sm" %>
+        <%= link_to "Todos", todos_path, class: "text-gray-600 hover:text-blue-600 font-medium text-sm" %>
+      </div>
+    </nav>
+
+    <main class="container mx-auto px-6 py-8">
+      <%= yield %>
+    </main>
   </body>
 </html>

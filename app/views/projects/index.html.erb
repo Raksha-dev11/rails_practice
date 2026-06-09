@@ -1,13 +1,30 @@
-<h1>Projects</h1>
+<div class="flex items-center justify-between mb-6">
+  <h1 class="text-2xl font-bold text-gray-900">Projects</h1>
+  <%= link_to "New Project", new_project_path, class: "bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors" %>
+</div>
 
-<ul>
+<div class="space-y-3">
+  <% @projects.each do |project| %>
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <%= link_to project.name, project_path(project), class: "text-lg font-semibold text-gray-900 hover:text-blue-600" %>
+        <% if project.active %>
+          <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700">Active</span>
+        <% else %>
+          <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-500">Inactive</span>
+        <% end %>
+      </div>
+      <div class="flex items-center gap-4">
+        <%= link_to "Edit", edit_project_path(project), class: "text-sm text-gray-500 hover:text-blue-600 font-medium" %>
+        <%= button_to "Delete", project_path(project), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "text-sm text-red-500 hover:text-red-700 font-medium bg-transparent cursor-pointer" %>
+      </div>
+    </div>
+  <% end %>
 
-   <% @projects.each do |project| %>
-    <li>
-      <%= link_to project.name, project_path(project) %>
-      <%= link_to "Edit", edit_project_path(project) %>
-      <%= button_to "Delete", project_path(project), method: :delete, data: { turbo_confirm: "Are you sure?" } %>
-    </li>
-    <%end %> 
-    
-</ul>
+  <% if @projects.empty? %>
+    <div class="text-center py-16 text-gray-400">
+      <p class="text-lg">No projects yet.</p>
+      <%= link_to "Create your first project", new_project_path, class: "text-blue-600 hover:underline text-sm" %>
+    </div>
+  <% end %>
+</div>

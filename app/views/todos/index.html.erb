@@ -1,16 +1,23 @@
-<p style="color: green"><%= notice %></p>
-
 <% content_for :title, "Todos" %>
 
-<h1>Todos</h1>
-
-<div id="todos">
-  <% @todos.each do |todo| %>
-    <%= render todo %>
-    <p>
-      <%= link_to "Show this todo", todo %>
-    </p>
-  <% end %>
+<div class="flex items-center justify-between mb-6">
+  <h1 class="text-2xl font-bold text-gray-900">Todos</h1>
+  <%= link_to "New Todo", new_todo_path, class: "bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors" %>
 </div>
 
-<%= link_to "New todo", new_todo_path %>
+<% if notice.present? %>
+  <div class="mb-4 bg-green-50 border border-green-200 text-green-700 rounded-lg px-4 py-3 text-sm"><%= notice %></div>
+<% end %>
+
+<div class="space-y-3" id="todos">
+  <% @todos.each do |todo| %>
+    <%= render todo %>
+  <% end %>
+
+  <% if @todos.empty? %>
+    <div class="text-center py-16 text-gray-400">
+      <p class="text-lg">No todos yet.</p>
+      <%= link_to "Create your first todo", new_todo_path, class: "text-blue-600 hover:underline text-sm" %>
+    </div>
+  <% end %>
+</div>
